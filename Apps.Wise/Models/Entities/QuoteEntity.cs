@@ -13,7 +13,7 @@ public class QuoteEntity
     [Display("Target currency")]
     public string TargetCurrency { get; set; }
     
-    public double Rate { get; set; }
+    public decimal Rate { get; set; }
     
     [Display("Rate type")]
     public string RateType { get; set; }
