@@ -6,7 +6,6 @@ using Apps.Wise.Models.Request.Webhook;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Webhooks;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
-using Newtonsoft.Json.Serialization;
 using RestSharp;
 
 namespace Apps.Wise.Webhooks.Handlers.Base;

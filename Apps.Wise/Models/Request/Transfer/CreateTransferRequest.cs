@@ -1,4 +1,6 @@
-﻿namespace Apps.Wise.Models.Request.Transfer;
+﻿using Apps.Wise.Extensions;
+
+namespace Apps.Wise.Models.Request.Transfer;
 
 public class CreateTransferRequest
 {
@@ -12,12 +14,12 @@ public class CreateTransferRequest
 
     public TransferDetails Details { get; set; }
 
-    public CreateTransferRequest(CreateTransferInput input)
+    public CreateTransferRequest(CreateTransferInput input, string quoteId)
     {
 
         TargetAccount = input.TargetAccount;
-        QuoteUuid = input.QuoteUuid;
-        CustomerTransactionId = input.CustomerTransactionId;
+        QuoteUuid = quoteId;
+        CustomerTransactionId = input.TransactionIdentifier?.AsGuid() ?? Guid.NewGuid().ToString() ;
         SourceAccount = input.SourceAccount;
         Details = new()
         {

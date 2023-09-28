@@ -3,6 +3,8 @@ using Apps.Wise.Api;
 using Apps.Wise.Constants;
 using Apps.Wise.Invocables;
 using Apps.Wise.Models.Entities;
+using Apps.Wise.Models.Request.Profile;
+using Apps.Wise.Models.Request.Quote;
 using Apps.Wise.Models.Request.Transfer;
 using Apps.Wise.Models.Response;
 using Apps.Wise.Models.Response.Transfer;
@@ -33,13 +35,18 @@ public class TransferActions : WiseInvocable
     }
 
     [Action("Create transfer", Description = "Create a new transfer")]
-    public Task<TransferEntity> CreateTransfer([ActionParameter] CreateTransferInput input)
+    public async Task<TransferEntity> CreateTransfer(
+        [ActionParameter] ProfileRequest profile,
+        [ActionParameter] CreateTransferInput transferInput,
+        [ActionParameter] CreateQuoteInput quoteInput)
     {
-        var payload = new CreateTransferRequest(input);
+        var quote = await CreateQuote(profile, new(quoteInput, transferInput.TargetAccount));
+        
+        var payload = new CreateTransferRequest(transferInput, quote.Id);
         var request = new WiseRestRequest(ApiEndpoints.Transfers, Method.Post, Creds)
             .WithJsonBody(payload, JsonConfig.CamelCaseSettings);
 
-        return Client.ExecuteWithErrorHandling<TransferEntity>(request);
+        return await Client.ExecuteWithErrorHandling<TransferEntity>(request);
     }
 
     [Action("Get transfer", Description = "Get details of a specific transfer")]
@@ -73,4 +80,15 @@ public class TransferActions : WiseInvocable
             ContentType = MediaTypeNames.Application.Pdf
         });
     }
+    
+    private Task<QuoteEntity> CreateQuote(
+        [ActionParameter] ProfileRequest profile,
+        [ActionParameter] CreateQuoteRequest input)
+    {
+        var endpoint = $"/v3/profiles/{profile.ProfileId}/quotes";
+        var request = new WiseRestRequest(endpoint, Method.Post, Creds)
+            .WithJsonBody(input, JsonConfig.CamelCaseSettings);
+        
+        return Client.ExecuteWithErrorHandling<QuoteEntity>(request);
+    }    
 }

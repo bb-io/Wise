@@ -10,9 +10,7 @@ public class CreateTransferInput
     [DataSource(typeof(AccountDataHandler))]
     public string TargetAccount { get; set; }
 
-    [Display("Quote UUID")] public string QuoteUuid { get; set; }
-
-    [Display("Customer transaction ID")] public string CustomerTransactionId { get; set; }
+    [Display("Transaction identifier")] public string? TransactionIdentifier { get; set; }
 
     [Display("Source account ID")]
     [DataSource(typeof(AccountDataHandler))]
