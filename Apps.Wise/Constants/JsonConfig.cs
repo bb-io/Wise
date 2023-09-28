@@ -5,11 +5,19 @@ namespace Apps.Wise.Constants;
 
 public static class JsonConfig
 {
-    public static JsonSerializerSettings Settings => new()
+    public static JsonSerializerSettings CamelCaseSettings => new()
     {
         ContractResolver = new DefaultContractResolver()
         {
             NamingStrategy = new CamelCaseNamingStrategy()
+        }
+    };
+    
+    public static JsonSerializerSettings SnakeCaseSettings => new()
+    {
+        ContractResolver = new DefaultContractResolver()
+        {
+            NamingStrategy = new SnakeCaseNamingStrategy()
         }
     };
 }

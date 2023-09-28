@@ -26,7 +26,7 @@ public class QuoteActions : WiseInvocable
     {
         var endpoint = $"/v3/profiles/{profile.ProfileId}/quotes";
         var request = new WiseRestRequest(endpoint, Method.Post, Creds)
-            .WithJsonBody(input, JsonConfig.Settings);
+            .WithJsonBody(input, JsonConfig.CamelCaseSettings);
         
         return Client.ExecuteWithErrorHandling<QuoteEntity>(request);
     }    

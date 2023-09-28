@@ -46,7 +46,7 @@ public class BalanceActions : WiseInvocable
         var endpoint = $"/v4/profiles/{profile.ProfileId}/balances";
         var request = new WiseRestRequest(endpoint, Method.Post, Creds)
             .AddHeader("X-idempotence-uuid", Guid.NewGuid().ToString())
-            .WithJsonBody(input, JsonConfig.Settings);
+            .WithJsonBody(input, JsonConfig.CamelCaseSettings);
 
         return Client.ExecuteWithErrorHandling<BalanceEntity>(request);
     }

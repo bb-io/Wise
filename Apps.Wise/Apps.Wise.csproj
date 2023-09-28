@@ -11,9 +11,4 @@
       <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.11" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Webhooks\Lists" />
-      <Folder Include="Webhooks\Models" />
-    </ItemGroup>
-
 </Project>

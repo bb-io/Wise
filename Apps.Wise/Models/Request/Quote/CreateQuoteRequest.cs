@@ -25,6 +25,7 @@ public class CreateQuoteRequest
     
     [Display("Target account")]
     [JsonConverter(typeof(StringToIntConverter), nameof(TargetAccount))]
+    [DataSource(typeof(AccountDataHandler))]
     public string? TargetAccount { get; set; }
     
     [Display("Pay out")]

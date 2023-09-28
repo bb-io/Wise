@@ -4,11 +4,11 @@ using Blackbird.Applications.Sdk.Common.Webhooks;
 
 namespace Apps.Wise.Webhooks.Handlers;
 
-public class TransferStatusChangedWebhookHandler : WiseWebhookHandler
+public class TransferStateChangedWebhookHandler : WiseWebhookHandler
 {
     protected override string Event => "transfers#state-change";
 
-    public TransferStatusChangedWebhookHandler([WebhookParameter] ProfileRequest profile) : base(profile)
+    public TransferStateChangedWebhookHandler([WebhookParameter] ProfileRequest profile) : base(profile)
     {
     }
 }

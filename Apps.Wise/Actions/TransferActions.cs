@@ -21,7 +21,7 @@ public class TransferActions : WiseInvocable
     public TransferActions(InvocationContext invocationContext) : base(invocationContext)
     {
     }
-    
+
     [Action("List transfers", Description = "List all transfer info")]
     public async Task<ListTransfersResponse> ListTransfers([ActionParameter] ListTransfersRequest input)
     {
@@ -30,17 +30,18 @@ public class TransferActions : WiseInvocable
 
         var items = await Client.PaginateViaOffset<TransferEntity>(request);
         return new(items);
-    }    
-    
+    }
+
     [Action("Create transfer", Description = "Create a new transfer")]
-    public Task<TransferEntity> CreateTransfer([ActionParameter] CreateTransferRequest input)
+    public Task<TransferEntity> CreateTransfer([ActionParameter] CreateTransferInput input)
     {
+        var payload = new CreateTransferRequest(input);
         var request = new WiseRestRequest(ApiEndpoints.Transfers, Method.Post, Creds)
-            .WithJsonBody(input, JsonConfig.Settings);
+            .WithJsonBody(payload, JsonConfig.CamelCaseSettings);
 
         return Client.ExecuteWithErrorHandling<TransferEntity>(request);
     }
-    
+
     [Action("Get transfer", Description = "Get details of a specific transfer")]
     public Task<TransferEntity> GetTransfer([ActionParameter] TransferRequest transfer)
     {
@@ -48,8 +49,8 @@ public class TransferActions : WiseInvocable
         var request = new WiseRestRequest(endpoint, Method.Get, Creds);
 
         return Client.ExecuteWithErrorHandling<TransferEntity>(request);
-    }    
-    
+    }
+
     [Action("Cancel transfer", Description = "Cancel specific transfer")]
     public Task<TransferEntity> CancelTransfer([ActionParameter] TransferRequest transfer)
     {
@@ -57,9 +58,9 @@ public class TransferActions : WiseInvocable
         var request = new WiseRestRequest(endpoint, Method.Put, Creds);
 
         return Client.ExecuteWithErrorHandling<TransferEntity>(request);
-    }    
-    
-    [Action("Get transfer receipt as PDR", Description = "Get receipt of a specific transfer as PDF")]
+    }
+
+    [Action("Get transfer receipt as PDF", Description = "Get receipt of a specific transfer as PDF")]
     public async Task<FileResponse> GetTransferReceipt([ActionParameter] TransferRequest transfer)
     {
         var endpoint = $"{ApiEndpoints.Transfers}/{transfer.TransferId}/receipt.pdf";

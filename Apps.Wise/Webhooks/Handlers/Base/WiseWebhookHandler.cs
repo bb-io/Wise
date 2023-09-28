@@ -1,4 +1,5 @@
 ﻿using Apps.Wise.Api;
+using Apps.Wise.Constants;
 using Apps.Wise.Models.Entities;
 using Apps.Wise.Models.Request.Profile;
 using Apps.Wise.Models.Request.Webhook;
@@ -30,13 +31,7 @@ public abstract class WiseWebhookHandler : IWebhookEventHandler
 
         var endpoint = $"/v3/profiles/{ProfileId}/subscriptions";
         var request = new WiseRestRequest(endpoint, Method.Post, creds)
-            .WithJsonBody(payload, new()
-            {
-                ContractResolver = new DefaultContractResolver()
-                {
-                    NamingStrategy = new SnakeCaseNamingStrategy()
-                }
-            });
+            .WithJsonBody(payload, JsonConfig.SnakeCaseSettings);
 
         return Client.ExecuteWithErrorHandling(request);
     }
