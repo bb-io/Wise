@@ -4,8 +4,8 @@
         <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <Product>Blackbird Wise</Product>
-        <Version>1.0.0</Version>
+        <Product>Wise</Product>
+        <Version>1.0.1</Version>
         <Description>International money manager</Description>
         <AssemblyName>Apps.Wise</AssemblyName>
     </PropertyGroup>
@@ -15,4 +15,8 @@
       <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.11" />
     </ItemGroup>
 
+    <ItemGroup>
+        <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.png"></EmbeddedResource>
+    </ItemGroup>
+    
 </Project>
