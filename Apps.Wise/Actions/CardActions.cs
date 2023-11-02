@@ -25,7 +25,7 @@ public class CardActions : WiseInvocable
         var request = new WiseRestRequest(endpoint, Method.Get, Creds);
 
         var items = await SensitiveHandler
-            .HandleSensisitiveRequest(() => Client.PaginateViaPageNumber<CardsPaginationResponse, CardEntity>(request));
+            .HandleSensitiveRequest(() => Client.PaginateViaPageNumber<CardsPaginationResponse, CardEntity>(request));
 
         return new(items);
     }

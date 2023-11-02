@@ -26,7 +26,7 @@ public class TransactionActions : WiseInvocable
         var request = new WiseRestRequest(endpoint, Method.Get, Creds);
 
         var items = await SensitiveHandler
-            .HandleSensisitiveRequest(() =>
+            .HandleSensitiveRequest(() =>
                 Client.PaginateViaPageNumber<TransactionsPaginationResponse, TransactionEntity>(request));
 
         return new(items);
@@ -39,6 +39,6 @@ public class TransactionActions : WiseInvocable
         var request = new WiseRestRequest(endpoint, Method.Get, Creds);
 
         return SensitiveHandler
-            .HandleSensisitiveRequest(() => Client.ExecuteWithErrorHandling<TransactionEntity>(request));
+            .HandleSensitiveRequest(() => Client.ExecuteWithErrorHandling<TransactionEntity>(request));
     }
 }
