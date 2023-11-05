@@ -6,9 +6,11 @@ namespace Apps.Wise.Models.Request.BatchGroup;
 
 public class CreateBatchGroupTransferInput
 {
+    [Display("Target account")]
+    [DataSource(typeof(AccountDataHandler))]
     public string TargetAccount { get; set; }
 
-    public string Reference { get; set; }
+    public string? Reference { get; set; }
 
     [Display("Transaction identifier")] public string? TransactionIdentifier { get; set; }
 
