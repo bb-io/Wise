@@ -8,6 +8,7 @@ using Apps.Wise.Models.Request.Quote;
 using Apps.Wise.Models.Request.Transfer;
 using Apps.Wise.Models.Response;
 using Apps.Wise.Models.Response.Transfer;
+using Apps.Wise.Utils;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -40,8 +41,9 @@ public class TransferActions : WiseInvocable
         [ActionParameter] CreateTransferInput transferInput,
         [ActionParameter] CreateQuoteInput quoteInput)
     {
-        var quote = await CreateQuote(profile, new(quoteInput, transferInput.TargetAccount));
-        
+        var quote = await new QuoteApi(InvocationContext).CreateQuote(profile,
+            new(quoteInput, transferInput.TargetAccount));
+
         var payload = new CreateTransferRequest(transferInput, quote.Id);
         var request = new WiseRestRequest(ApiEndpoints.Transfers, Method.Post, Creds)
             .WithJsonBody(payload, JsonConfig.CamelCaseSettings);
@@ -80,15 +82,4 @@ public class TransferActions : WiseInvocable
             ContentType = MediaTypeNames.Application.Pdf
         });
     }
-    
-    private Task<QuoteEntity> CreateQuote(
-        [ActionParameter] ProfileRequest profile,
-        [ActionParameter] CreateQuoteRequest input)
-    {
-        var endpoint = $"/v3/profiles/{profile.ProfileId}/quotes";
-        var request = new WiseRestRequest(endpoint, Method.Post, Creds)
-            .WithJsonBody(input, JsonConfig.CamelCaseSettings);
-        
-        return Client.ExecuteWithErrorHandling<QuoteEntity>(request);
-    }    
 }

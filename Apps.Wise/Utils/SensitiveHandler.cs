@@ -2,7 +2,7 @@
 
 public static class SensitiveHandler
 {
-    public static async Task<T> HandleSensisitiveRequest<T>(Func<Task<T>> func)
+    public static async Task<T> HandleSensitiveRequest<T>(Func<Task<T>> func)
     {
         try
         {
