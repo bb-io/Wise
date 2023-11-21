@@ -25,7 +25,7 @@ public class CreateQuoteRequest
         SourceCurrency = quoteInput.SourceCurrency;
         TargetCurrency = quoteInput.TargetCurrency;
         SourceAmount = quoteInput.SourceAmount;
-        TargetAmount = quoteInput.TargetAmount;
+        TargetAmount = quoteInput.TargetAmount ?? 0;
         PayOut = quoteInput.PayOut;
         PreferredPayIn = quoteInput.PreferredPayIn;
         TargetAccount = TargetAccount;
