@@ -28,6 +28,6 @@ public class CreateQuoteRequest
         TargetAmount = quoteInput.TargetAmount ?? 0;
         PayOut = quoteInput.PayOut;
         PreferredPayIn = quoteInput.PreferredPayIn;
-        TargetAccount = TargetAccount;
+        TargetAccount = targetAccount;
     }
 }
