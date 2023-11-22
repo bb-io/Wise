@@ -23,7 +23,7 @@ public class TransferEntity
 
     public string? Reference { get; set; }
 
-    public decimal? Rate { get; set; }
+    public double? Rate { get; set; }
 
     [Display("Created date")] public DateTime? Created { get; set; }
 
@@ -31,9 +31,9 @@ public class TransferEntity
 
     [Display("Target currency")] public string TargetCurrency { get; set; }
 
-    [Display("Source value")] public decimal SourceValue { get; set; }
+    [Display("Source value")] public double SourceValue { get; set; }
 
-    [Display("Target value")] public decimal TargetValue { get; set; }
+    [Display("Target value")] public double TargetValue { get; set; }
 
     [Display("Has active issues")] public bool HasActiveIssues { get; set; }
 
