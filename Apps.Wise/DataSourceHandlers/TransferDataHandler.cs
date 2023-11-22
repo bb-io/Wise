@@ -22,7 +22,7 @@ public class TransferDataHandler : WiseInvocable, IAsyncDataSourceHandler
 
         return response
             .Where(x => context.SearchString is null ||
-                        x.ToString().Contains(context.SearchString, StringComparison.OrdinalIgnoreCase) is true)
-            .ToDictionary(x => x.Id, x => x.ToString());
+                        x.GetDynamicDisplay().Contains(context.SearchString, StringComparison.OrdinalIgnoreCase) is true)
+            .ToDictionary(x => x.Id, x => x.GetDynamicDisplay());
     }
 }
