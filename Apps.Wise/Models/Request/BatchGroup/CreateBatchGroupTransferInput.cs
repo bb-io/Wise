@@ -10,7 +10,7 @@ public class CreateBatchGroupTransferInput
     [DataSource(typeof(AccountDataHandler))]
     public string TargetAccount { get; set; }
 
-    public string Reference { get; set; }
+    public string? Reference { get; set; }
 
     [Display("Transaction identifier")] public string? TransactionIdentifier { get; set; }
 

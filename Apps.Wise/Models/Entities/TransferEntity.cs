@@ -13,9 +13,9 @@ public class TransferEntity
 
     [Display("Target account ID")] public string? TargetAccount { get; set; }
 
-    [Display("Source account ID")] public string? SourceAccount { get; set; }
+    //[Display("Source account ID")] public string? SourceAccount { get; set; }
 
-    [Display("Quote ID (v1)")] public string? Quote { get; set; }
+    //[Display("Quote ID (v1)")] public string? Quote { get; set; }
 
     [Display("Quote UUID (v2)")] public string? QuoteUuid { get; set; }
 
@@ -37,6 +37,6 @@ public class TransferEntity
 
     [Display("Has active issues")] public bool HasActiveIssues { get; set; }
 
-    public override string ToString() =>
+    public string GetDynamicDisplay() =>
         string.IsNullOrWhiteSpace(Reference) ? $"{SourceCurrency}->{TargetCurrency} {Status?.ToPascalCase()}" : Reference;
 }
