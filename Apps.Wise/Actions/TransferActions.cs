@@ -12,6 +12,7 @@ using Apps.Wise.Utils;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
+using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 using Blackbird.Applications.Sdk.Utils.Extensions.String;
 using RestSharp;
@@ -21,8 +22,12 @@ namespace Apps.Wise.Actions;
 [ActionList]
 public class TransferActions : WiseInvocable
 {
-    public TransferActions(InvocationContext invocationContext) : base(invocationContext)
+    private readonly IFileManagementClient _fileManagementClient;
+    
+    public TransferActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) 
+        : base(invocationContext)
     {
+        _fileManagementClient = fileManagementClient;
     }
 
     [Action("List transfers", Description = "List all transfer info")]
@@ -74,12 +79,12 @@ public class TransferActions : WiseInvocable
     {
         var endpoint = $"{ApiEndpoints.Transfers}/{transfer.TransferId}/receipt.pdf";
         var request = new WiseRestRequest(endpoint, Method.Get, Creds);
-
+        
         var response = await Client.ExecuteWithErrorHandling(request);
-        return new(new(response.RawBytes)
-        {
-            Name = $"{transfer.TransferId}.pdf",
-            ContentType = MediaTypeNames.Application.Pdf
-        });
+
+        using var stream = new MemoryStream(response.RawBytes);
+        var file = await _fileManagementClient.UploadAsync(stream, MediaTypeNames.Application.Pdf,
+            $"{transfer.TransferId}.pdf");
+        return new(file);
     }
 }
