@@ -11,7 +11,7 @@ using RestSharp;
 
 namespace Apps.Wise.Actions;
 
-[ActionList]
+[ActionList("Card")]
 public class CardActions : WiseInvocable
 {
     public CardActions(InvocationContext invocationContext) : base(invocationContext)

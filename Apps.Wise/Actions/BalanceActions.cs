@@ -13,7 +13,7 @@ using RestSharp;
 
 namespace Apps.Wise.Actions;
 
-[ActionList]
+[ActionList("Balance")]
 public class BalanceActions : WiseInvocable
 {
     public BalanceActions(InvocationContext invocationContext) : base(invocationContext)

@@ -9,7 +9,7 @@ using RestSharp;
 
 namespace Apps.Wise.Actions;
 
-[ActionList]
+[ActionList("Profile")]
 public class ProfileActions : WiseInvocable
 {
     public ProfileActions(InvocationContext invocationContext) : base(invocationContext)

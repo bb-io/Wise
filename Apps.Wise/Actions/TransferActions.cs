@@ -19,7 +19,7 @@ using RestSharp;
 
 namespace Apps.Wise.Actions;
 
-[ActionList]
+[ActionList("Transfer")]
 public class TransferActions : WiseInvocable
 {
     private readonly IFileManagementClient _fileManagementClient;

@@ -12,7 +12,7 @@ using RestSharp;
 
 namespace Apps.Wise.Actions;
 
-[ActionList]
+[ActionList("Transaction")]
 public class TransactionActions : WiseInvocable
 {
     public TransactionActions(InvocationContext invocationContext) : base(invocationContext)

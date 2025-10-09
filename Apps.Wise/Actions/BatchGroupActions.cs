@@ -16,7 +16,7 @@ using RestSharp;
 
 namespace Apps.Wise.Actions;
 
-[ActionList]
+[ActionList("Batch group")]
 public class BatchGroupActions : WiseInvocable
 {
     public BatchGroupActions(InvocationContext invocationContext) : base(invocationContext)
