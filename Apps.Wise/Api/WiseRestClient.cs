@@ -1,6 +1,7 @@
 ﻿using Apps.Wise.Constants;
 using Apps.Wise.Models.Response.Base;
 using Apps.Wise.Models.Response.Error;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 using Blackbird.Applications.Sdk.Utils.Extensions.String;
 using Blackbird.Applications.Sdk.Utils.RestSharp;
 using Newtonsoft.Json;
@@ -71,6 +72,6 @@ public class WiseRestClient : BlackBirdRestClient
             return new(string.Join("; ", errors.Errors.Select(x => x.ToString())));
 
         var codeError = JsonConvert.DeserializeObject<CodeError>(json)!;
-        return new(codeError.ToString());
+        throw new PluginApplicationException(codeError.ToString());
     }
 }
