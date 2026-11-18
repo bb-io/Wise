@@ -4,7 +4,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <Product>Wise</Product>
-    <Version>1.0.9</Version>
+    <Version>1.0.10</Version>
     <Description>International money manager</Description>
     <AssemblyName>Apps.Wise</AssemblyName>
   </PropertyGroup>
@@ -15,5 +15,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource CopyToOutputDirectory="Always" Include="image\icon.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\README.md" Link="README.md" CopyToOutputDirectory="Always" />
   </ItemGroup>
 </Project>
